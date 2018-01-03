@@ -1,19 +1,19 @@
 {
-  "name": "i3-status-starter",
+  "name": "i3-status-net",
   "version": "0.1.4",
-  "description": "Template for writing own modules for i3-status",
+  "description": "i3-status net block",
   "main": "lib/index.js",
-  "url": "https://github.com/fehmer/i3-status-starter/issues",
+  "url": "https://github.com/tomasbulva/i3-status-net/issues",
   "scripts": {
     "prepublish": "npm run compile",
     "compile": "babel src/ -d lib -s",
     "test": "npm run compile && node_modules/mocha/bin/mocha --compilers js:babel-register test --recursive --reporter gitlablist-mocha",
-    "watch": "npm run compile && (babel -w src/ -d lib -s &) && node_modules/mocha/bin/mocha --compilers js:babel-register test --recursive  --reporter min --watch",
+    "watch": "npm run compile && (babel -w src/ -d lib -s &)",
     "cover": "npm run compile && istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register --colors --reporter dot test/ --recursive"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fehmer/i3-status-starter.git"
+    "url": "https://github.com/tomasbulva/i3-status-net.git"
   },
   "babel": {
     "presets": [
@@ -28,7 +28,11 @@
   ],
   "author": "Christian Fehmer",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "is-charging": "^1.2.0",
+    "node-battery": "^0.2.2",
+    "winston": "^2.4.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-preset-latest": "^6.16.0",
