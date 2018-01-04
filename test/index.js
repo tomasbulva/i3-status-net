@@ -1,20 +1,19 @@
 'use strict';
 
 import { expect } from 'chai';
-import Starter from './../lib/index';
+import Net from './../lib/index';
 
 
-describe('Module Starter', () => {
+describe('Module Net', () => {
 
     describe('#constructor', () => {
         it('should construct and store custom options', () => {
-            var block = new Starter({
-                text: 'Peter',
-                secretValue: 'nonEncryptedSecret'
+            var block = new Net({
+                interface: 'wlan1',
+
             });
 
-            expect(block.text).to.equal('Peter');
-            expect(block.secretValue).to.equal('nonEncryptedSecret');
+            expect(block.iface).to.equal('wlan1');
         });
     });
 
@@ -22,14 +21,14 @@ describe('Module Starter', () => {
     describe('update', () => {
         it('should update the output and fire updated', (done) => {
             //construct block
-            var block = new Starter({
-                text: 'Peter'
+            var block = new Net({
+                interface: 'wlanX'
             });
 
             execute(block, (output) => {
                 //check output line
-                expect(output.short_text).to.equal('Peter');
-                expect(output.full_text).to.equal('Peter');
+                expect(output.short_text).to.equal('<span font="Material-Design-Iconic-Font" size="large"></span>');
+                expect(output.full_text).to.equal('<span font="Material-Design-Iconic-Font" size="large"></span>');
 
                 done();
             });

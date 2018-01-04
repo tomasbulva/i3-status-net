@@ -12,8 +12,6 @@ export default class Net extends EventEmitter {
         this.output = output || {};
 
         //custom config
-        this.text = options.text || '';
-        this.secretValue = options.secretValue;
         this.isUp = false;
         this.iface = options.interface || 'wlan0';
         this.filePath = '/proc/net/wireless';
@@ -24,6 +22,21 @@ export default class Net extends EventEmitter {
     update() {
 
         this.emit('pause', this);
+
+        if ( 
+            ! fs.existsSync(this.state) 
+            || ! fs.existsSync(this.filePath)
+        ) {
+            var down = '<span font="Material-Design-Iconic-Font" size="large"></span>';
+            this.output.full_text = down;
+            this.output.short_text = down;
+
+
+            this.emit('resume', this);
+            this.emit('updated', this, this.output);
+
+            return false;
+        }
 
         fs.readFile(this.state, 'utf8', (error, data) => {
 
